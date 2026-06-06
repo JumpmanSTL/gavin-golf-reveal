@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gavin Golf Sendoff Reveal</title>
+  <style>
+    :root{
+      --green:#7dff9a; --lime:#d4ff4b; --gold:#ffd05c; --red:#ff4f3e;
+      --ink:#f7f5e9; --muted:#b8b6a9; --dark:#050607; --panel:rgba(10,14,12,.62);
+    }
+    *{box-sizing:border-box} html,body{margin:0;height:100%;background:#030403;color:var(--ink);font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;overflow:hidden}
+    body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 15% 10%,rgba(125,255,154,.2),transparent 28%),radial-gradient(circle at 80% 75%,rgba(255,208,92,.16),transparent 35%),linear-gradient(120deg,rgba(0,0,0,.65),rgba(0,0,0,.2));z-index:3;pointer-events:none;mix-blend-mode:screen}
+    body:after{content:"";position:fixed;inset:0;background:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);background-size:100% 4px;z-index:5;pointer-events:none;opacity:.35}
+    .deck{height:100vh;width:100vw;position:relative;background:#050607}
+    .slide{position:absolute;inset:0;opacity:0;transform:scale(1.035);transition:opacity .65s ease, transform 1s ease;display:grid;place-items:center;overflow:hidden}
+    .slide.active{opacity:1;transform:scale(1);z-index:2}
+    .bg,.bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.07) contrast(1.04);transform:scale(1.02)}
+    .bg.framed{background-image:var(--frame);background-size:cover;background-position:center;overflow:hidden;filter:none;transform:none}
+    .bg.framed:before{content:"";position:absolute;inset:-24px;background:inherit;filter:blur(16px) saturate(1.05);transform:scale(1.08);opacity:.78}
+    .opening > .bg > img.bg,.final > .bg > img.bg{object-fit:contain;object-position:center;transform:scale(.92);filter:saturate(1.06) contrast(1.03);z-index:1}
+    .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.28) 45%,rgba(0,0,0,.8)),linear-gradient(0deg,rgba(0,0,0,.72),transparent 38%,rgba(0,0,0,.35));}
+    .bg.light:after{background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.25) 52%,rgba(0,0,0,.62)),linear-gradient(0deg,rgba(0,0,0,.6),transparent 50%,rgba(0,0,0,.25));}
+    .content{position:relative;z-index:4;width:min(1120px,92vw);padding:clamp(22px,4vw,54px)}
+    .kicker{display:inline-flex;gap:10px;align-items:center;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(12px,1.6vw,15px);color:var(--lime);font-weight:900;margin-bottom:18px;text-shadow:0 2px 20px #000}
+    .kicker:before{content:"";width:44px;height:3px;background:var(--lime);box-shadow:0 0 18px var(--lime)}
+    h1{margin:0;line-height:.86;letter-spacing:-.075em;font-size:clamp(50px,10vw,126px);font-weight:1000;text-transform:uppercase;text-shadow:0 8px 40px rgba(0,0,0,.65)}
+    h2{margin:0;line-height:.9;letter-spacing:-.06em;font-size:clamp(42px,8vw,108px);font-weight:1000;text-transform:uppercase;text-shadow:0 8px 38px rgba(0,0,0,.7)}
+    .sub{max-width:760px;margin-top:16px;font-size:clamp(17px,2.35vw,30px);line-height:1.08;font-weight:850;text-shadow:0 5px 25px #000;color:#fff}
+    .small{font-size:clamp(15px,2vw,23px);line-height:1.25;color:#eee;font-weight:700;max-width:720px}
+    .tag{display:inline-block;margin-top:24px;padding:12px 16px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(0,0,0,.38);backdrop-filter:blur(8px);font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:#fff}
+    .grid{display:block;width:min(1120px,92vw);position:relative;z-index:4}
+    .grid .content{width:min(760px,68vw)}
+    .photo-stack{height:520px;width:360px;position:absolute;right:-10px;top:50%;transform:translateY(-50%);perspective:1000px}.polaroid{position:absolute;background:#f6f2df;color:#111;padding:10px 10px 38px;border-radius:6px;box-shadow:0 20px 55px rgba(0,0,0,.62);width:210px}.polaroid img{width:100%;height:250px;object-fit:cover;display:block;border-radius:3px}.polaroid b{position:absolute;left:14px;bottom:10px;font-size:14px;letter-spacing:.02em}
+    .p1{transform:rotate(-8deg);left:0;top:0;z-index:3}.p2{transform:rotate(7deg);right:0;top:58px;z-index:4}.p3{transform:rotate(-2deg);left:56px;bottom:0;z-index:5;width:220px}
+    .route{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:32px;max-width:950px}.stop{min-width:0;text-align:center}.dot{width:16px;height:16px;border-radius:50%;background:var(--lime);box-shadow:0 0 22px var(--lime);margin:0 auto 9px}.line{height:3px;flex:1;background:linear-gradient(90deg,var(--lime),var(--gold));box-shadow:0 0 16px rgba(212,255,75,.55)}.stop b{display:block;font-size:clamp(11px,1.6vw,16px);text-transform:uppercase;letter-spacing:.08em}.stop span{display:block;color:var(--muted);font-size:clamp(10px,1.35vw,13px);margin-top:4px}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.22);box-shadow:0 24px 62px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(13px);border-radius:22px;padding:clamp(18px,3vw,30px);max-width:520px}.itinerary .content{width:min(560px,82vw);margin-left:clamp(8px,4vw,52px);padding-top:clamp(18px,4vw,44px);padding-bottom:clamp(64px,7vw,84px)}.day{font-size:clamp(12px,1.45vw,14px);color:var(--lime);text-transform:uppercase;letter-spacing:.18em;font-weight:950}.course{font-size:clamp(38px,6.2vw,72px);line-height:.88;text-transform:uppercase;letter-spacing:-.06em;font-weight:1000;margin:8px 0}.time{font-size:clamp(24px,4vw,44px);font-weight:1000;color:var(--gold);letter-spacing:-.05em}.detail{font-size:clamp(14px,1.8vw,18px);line-height:1.22;color:#f6f6f0;font-weight:800;margin-top:10px}.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.badge{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.1);font-weight:900;text-transform:uppercase;letter-spacing:.06em;font-size:clamp(10px,1.1vw,12px);color:#fff}
+    .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center;width:min(1120px,92vw);position:relative;z-index:4}.portrait{height:min(72vh,720px);border-radius:30px;overflow:hidden;border:1px solid rgba(255,255,255,.22);box-shadow:0 30px 90px rgba(0,0,0,.7)}.portrait img{width:100%;height:100%;object-fit:cover}.final h2{font-size:clamp(46px,8vw,104px)}.final .sub{font-size:clamp(22px,4vw,52px);line-height:1.0;color:#fff}
+    .controls{position:fixed;z-index:10;left:18px;right:18px;bottom:10px;display:flex;align-items:center;gap:12px;opacity:.72;transition:opacity .2s}.controls:hover{opacity:1}.bar{height:5px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;flex:1}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--gold),var(--red));box-shadow:0 0 16px var(--lime);transition:width .2s linear}.btn{border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.42);color:#fff;border-radius:999px;padding:8px 12px;font-weight:900;backdrop-filter:blur(8px);cursor:pointer}.count{font-weight:900;color:#fff;text-shadow:0 3px 14px #000;min-width:56px;text-align:right}
+    .flash{color:var(--lime);text-shadow:0 0 22px var(--lime),0 8px 30px #000}.gold{color:var(--gold)}
+    @media (max-width:760px){.grid,.split{grid-template-columns:1fr}.photo-stack{height:470px}.polaroid{width:58%;min-width:170px}.polaroid img{height:220px}.route{gap:4px}.content{padding-bottom:70px}.itinerary .content{width:min(470px,86vw);margin-left:0}.card{margin-top:60px;max-width:430px}.portrait{height:48vh}.controls{bottom:8px}.btn{padding:8px 10px}}
+  </style>
+</head>
+<body>
+<div class="deck" id="deck">
+  <section class="slide opening active" data-duration="6500">
+    <div class="bg framed" style="--frame:url('assets/personal/steve-gavin-cart-selfie.jpg')"><img class="bg" src="assets/personal/steve-gavin-cart-selfie.jpg" alt="Steve and Gavin golf cart selfie"></div>
+    <div class="content"><div class="kicker">For G</div><h1>Pack<br><span class="flash">Your Clubs.</span></h1><p class="sub">This is not an itinerary. This is a warning shot.</p><span class="tag">June 21–24, 2026</span></div>
+  </section>
+  <section class="slide" data-duration="7000">
+    <div class="bg light"><img class="bg" src="assets/course/spirit-hero.jpg" alt="Spirit Hollow fairway"></div>
+    <div class="grid"><div class="content"><div class="kicker">The setup</div><h2>One last<br>summer run.</h2><p class="sub">Before college. Before everything changes. Four days. Three courses. Zero easy matches.</p></div><div class="photo-stack"><div class="polaroid p1"><img src="assets/personal/gavin-boys-8-tee.jpg"><b>Boys 8 tee box</b></div><div class="polaroid p2"><img src="assets/personal/gavin-statue-pose.jpg"><b>Always had the pose</b></div><div class="polaroid p3"><img src="assets/personal/steve-gavin-putting-green.jpg"><b>From the early rounds</b></div></div></div>
+  </section>
+  <section class="slide" data-duration="6500">
+    <div class="bg"><img class="bg" src="assets/course/spirit-water.jpg" alt="route background"></div>
+    <div class="content"><div class="kicker">The route</div><h2>Missouri to Iowa<br>to Illinois.</h2><p class="small">Wentzville → Spirit Hollow → Davenport → Fyre Lake → TPC Deere Run → Home</p><div class="route"><div class="stop"><div class="dot"></div><b>Home</b><span>Sun PM</span></div><div class="line"></div><div class="stop"><div class="dot"></div><b>Spirit</b><span>Mon</span></div><div class="line"></div><div class="stop"><div class="dot"></div><b>Fyre</b><span>Tue</span></div><div class="line"></div><div class="stop"><div class="dot"></div><b>TPC</b><span>Wed</span></div></div></div>
+  </section>
+  <section class="slide itinerary" data-duration="6500">
+    <div class="bg"><img class="bg" src="assets/course/spirit-18.jpg" alt="Spirit Hollow"></div>
+    <div class="content"><div class="card"><div class="day">Monday · June 22</div><div class="course">Spirit<br>Hollow</div><div class="time">9:00 AM</div><div class="detail">Burlington, Iowa. Hidden-gem opener. Fresh legs. First swing of the trip.</div><div class="badge-row"><span class="badge">Day 1</span><span class="badge">Optional replay</span><span class="badge">No warmup excuses</span></div></div></div>
+  </section>
+  <section class="slide itinerary" data-duration="7000">
+    <div class="bg"><video autoplay muted loop playsinline src="assets/course/fyre-video.mp4"></video></div>
+    <div class="content"><div class="card"><div class="day">Tuesday · June 23</div><div class="course">Fyre<br>Lake</div><div class="time">11:30 AM</div><div class="detail">Sherrard, Illinois. Jack Nicklaus Design energy. Middle round, full send.</div><div class="badge-row"><span class="badge">Day 2</span><span class="badge">Extra holes?</span><span class="badge">Stay · Play · Repeat</span></div></div></div>
+  </section>
+  <section class="slide itinerary" data-duration="6500">
+    <div class="bg"><img class="bg" src="assets/course/tpc-hero.jpg" alt="TPC Deere Run"></div>
+    <div class="content"><div class="card"><div class="day">Wednesday · June 24</div><div class="course">TPC<br>Deere Run</div><div class="time">8:50 AM</div><div class="detail">Silvis, Illinois. PGA Tour finish. John Deere Classic territory. Bring your A-game.</div><div class="badge-row"><span class="badge">Final round</span><span class="badge">Tour stop</span><span class="badge">No layups</span></div></div></div>
+  </section>
+  <section class="slide" data-duration="6500">
+    <div class="bg light"><img class="bg" src="assets/course/tpc-jdc.jpg" alt="John Deere Classic scene"></div>
+    <div class="split"><div class="portrait"><img src="assets/personal/gavin-current-hero.jpg" alt="Gavin current hero"></div><div class="content"><div class="kicker">Now</div><h2>You grew up<br>on golf.</h2><p class="sub">So we’re sending this chapter off the right way.</p></div></div>
+  </section>
+  <section class="slide final" data-duration="9000">
+    <div class="bg framed" style="--frame:url('assets/personal/course-selfie.jpg')"><img class="bg" src="assets/personal/course-selfie.jpg" alt="golf course selfie"></div>
+    <div class="content"><div class="kicker">Final note</div><h2>Proud of you, <span class="flash">G.</span></h2><p class="sub">Now pack your clubs — I’ve got one more <span class="gold">ass kicking</span> to hand out before college.</p><span class="tag">— Uncle Steve</span></div>
+  </section>
+</div>
+<div class="controls"><button class="btn" id="prev">←</button><button class="btn" id="play">Pause</button><button class="btn" id="next">→</button><div class="bar"><div class="fill" id="fill"></div></div><div class="count" id="count">1/8</div></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let i=0,playing=true,start=performance.now(),dur=+slides[0].dataset.duration;const fill=document.getElementById('fill'),count=document.getElementById('count'),play=document.getElementById('play');
+function show(n){slides[i].classList.remove('active');i=(n+slides.length)%slides.length;slides[i].classList.add('active');start=performance.now();dur=+slides[i].dataset.duration;count.textContent=`${i+1}/${slides.length}`;}
+function tick(t){if(playing){let p=(t-start)/dur;fill.style.width=Math.min(100,p*100)+'%';if(p>=1)show(i+1)}requestAnimationFrame(tick)}requestAnimationFrame(tick);
+document.getElementById('next').onclick=()=>show(i+1);document.getElementById('prev').onclick=()=>show(i-1);play.onclick=()=>{playing=!playing;play.textContent=playing?'Pause':'Play';start=performance.now()};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1);if(e.key===' '){playing=!playing;play.textContent=playing?'Pause':'Play'}});
+</script>
+</body>
+</html>
