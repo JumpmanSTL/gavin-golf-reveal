@@ -155,9 +155,21 @@
     }
     .course-bg{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05); display:block;}
     .course-copy{padding:22px; display:flex; flex-direction:column; gap:12px; flex:1;}
-    .logo-wrap{height:64px; display:flex; align-items:center; justify-content:flex-start;}
-    .logo-wrap img{max-height:56px; max-width:178px; object-fit:contain; filter:drop-shadow(0 10px 24px rgba(0,0,0,.45));}
-    .tpc-logo img{max-width:224px; max-height:64px;}
+    .logo-wrap{
+      min-height:64px;
+      width:max-content;
+      max-width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(255,255,255,.72);
+      border-radius:14px;
+      padding:10px 14px;
+      box-shadow:0 16px 38px rgba(0,0,0,.26);
+    }
+    .logo-wrap img{max-height:48px; max-width:178px; object-fit:contain; filter:none;}
+    .tpc-logo img{max-width:224px; max-height:54px;}
     .course-meta{font-weight:900; color:var(--gold); letter-spacing:.14em; text-transform:uppercase; font-size:12px;}
     .course-name{font-family:Georgia,serif; font-size:36px; line-height:.95; letter-spacing:-.04em; margin:0;}
     .course-line{color:#f6e9c7; font-size:17px; line-height:1.35; margin:0;}
@@ -312,7 +324,7 @@
       <div class="timeline">
         <div class="day">
           <div class="day-date">Friday • July 24</div>
-          <div class="day-main"><strong>Opening round at Spirit Hollow</strong><span>11:00 AM tee time, then rolling into Rhythm City as home base.</span></div>
+          <div class="day-main"><strong>Opening round at Spirit Hollow</strong><span>11:00 AM tee time, then rolling into Davenport, IA as home base.</span></div>
           <div class="day-tag">Confirmed</div>
         </div>
         <div class="day">
