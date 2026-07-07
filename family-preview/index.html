@@ -134,23 +134,48 @@
     .section-title{display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:24px;}
     h2{margin:0; font-family:Georgia,serif; font-size:clamp(34px,5vw,64px); line-height:.94; letter-spacing:-.045em;}
     .section-kicker{color:var(--muted); max-width:520px; font-size:18px; line-height:1.45;}
-    .course-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px;}
+    .course-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; align-items:stretch;}
     .course-card{
-      position:relative; min-height:430px; overflow:hidden; border-radius:30px; padding:22px;
-      display:flex; flex-direction:column; justify-content:space-between;
+      overflow:hidden; border-radius:30px;
       border:1px solid rgba(255,255,255,.13); box-shadow:0 25px 70px rgba(0,0,0,.35);
+      background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
+      display:flex; flex-direction:column;
+    }
+    .course-image{
+      height:310px;
+      position:relative;
+      overflow:hidden;
       background:#102318;
     }
-    .course-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.84));z-index:1;}
-    .course-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 18%, rgba(231,190,90,.24), transparent 16rem);z-index:2;mix-blend-mode:screen;}
-    .course-card > *{position:relative;z-index:3}
-    .course-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.08) contrast(1.05);}
-    .logo-wrap{height:72px; display:flex; align-items:flex-start; justify-content:flex-start;}
-    .logo-wrap img{max-height:62px; max-width:178px; object-fit:contain; filter:drop-shadow(0 10px 24px rgba(0,0,0,.75));}
-    .tpc-logo img{max-width:224px; max-height:74px;}
-    .course-meta{font-weight:900; color:var(--gold); letter-spacing:.14em; text-transform:uppercase; font-size:12px; margin-bottom:10px;}
-    .course-name{font-family:Georgia,serif; font-size:36px; line-height:.95; letter-spacing:-.04em; margin:0 0 12px;}
+    .course-image::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.08));
+      pointer-events:none;
+    }
+    .course-bg{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.05); display:block;}
+    .course-copy{padding:22px; display:flex; flex-direction:column; gap:12px; flex:1;}
+    .logo-wrap{height:64px; display:flex; align-items:center; justify-content:flex-start;}
+    .logo-wrap img{max-height:56px; max-width:178px; object-fit:contain; filter:drop-shadow(0 10px 24px rgba(0,0,0,.45));}
+    .tpc-logo img{max-width:224px; max-height:64px;}
+    .course-meta{font-weight:900; color:var(--gold); letter-spacing:.14em; text-transform:uppercase; font-size:12px;}
+    .course-name{font-family:Georgia,serif; font-size:36px; line-height:.95; letter-spacing:-.04em; margin:0;}
     .course-line{color:#f6e9c7; font-size:17px; line-height:1.35; margin:0;}
+    .course-link{
+      margin-top:auto;
+      align-self:flex-start;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:#08140e;
+      background:linear-gradient(135deg,#ffe7a1,#d8a83d);
+      text-decoration:none;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:950;
+      box-shadow:0 14px 34px rgba(0,0,0,.28);
+    }
+    .course-link::after{content:"↗"; font-size:14px;}
     .timeline{
       display:grid;
       gap:14px;
@@ -208,7 +233,8 @@
       .photo-stack{left:14px; bottom:132px; transform:rotate(-2deg)}
       .mini{width:82px;height:108px;border-radius:14px;border-width:3px;}
       .hero-badge{left:16px;right:16px;bottom:16px;max-width:none;}
-      .course-card{min-height:390px;border-radius:24px;}
+      .course-card{border-radius:24px;}
+      .course-image{height:260px;}
       .course-name{font-size:32px;}
       .finale{min-height:520px;border-radius:28px;padding:22px;}
     }
@@ -223,7 +249,7 @@
         <h1>One last summer <span>golf run.</span></h1>
         <p class="dek">Three days built around big swings, championship stops, a Saturday doubleheader, and the kind of uncle-nephew weekend that becomes family legend.</p>
         <div class="mission-strip" aria-label="Trip highlights">
-          <div class="pill">4 rounds targeted</div>
+          <div class="pill">4 rounds confirmed</div>
           <div class="pill">3 standout courses</div>
           <div class="pill">1 final college sendoff</div>
         </div>
@@ -246,30 +272,33 @@
       </div>
       <div class="course-grid">
         <article class="course-card">
-          <img class="course-bg" src="assets/course/spirit-hero.jpg" alt="Spirit Hollow golf course" />
-          <div class="logo-wrap"><img src="assets/logos/spirit-logo.png" alt="Spirit Hollow logo" /></div>
-          <div>
-            <div class="course-meta">Friday + Sunday target</div>
+          <div class="course-image"><img class="course-bg" src="assets/course/spirit-hero.jpg" alt="Spirit Hollow golf course" /></div>
+          <div class="course-copy">
+            <div class="logo-wrap"><img src="assets/logos/spirit-logo.png" alt="Spirit Hollow logo" /></div>
+            <div class="course-meta">Friday + Sunday</div>
             <h3 class="course-name">Spirit Hollow</h3>
-            <p class="course-line">A true destination-course bookend for the weekend — the opening shot and, if the window lines up, the closing encore.</p>
+            <p class="course-line">A true destination-course bookend for the weekend — the opening shot and the closing encore.</p>
+            <a class="course-link" href="https://www.spirithollow.com/" target="_blank" rel="noopener">Explore Spirit Hollow</a>
           </div>
         </article>
         <article class="course-card">
-          <img class="course-bg" src="assets/course/fyre-wide.jpg" alt="Fyre Lake Golf Club" />
-          <div class="logo-wrap"><img src="assets/logos/fyre-logo.png" alt="Fyre Lake logo" /></div>
-          <div>
+          <div class="course-image"><img class="course-bg" src="assets/course/fyre-wide.jpg" alt="Fyre Lake Golf Club" /></div>
+          <div class="course-copy">
+            <div class="logo-wrap"><img src="assets/logos/fyre-logo.png" alt="Fyre Lake logo" /></div>
             <div class="course-meta">Saturday morning</div>
             <h3 class="course-name">Fyre Lake</h3>
             <p class="course-line">The Saturday opener: dramatic, fun, and a perfect first half of a doubleheader day.</p>
+            <a class="course-link" href="https://fyrelakegolf.com/" target="_blank" rel="noopener">Explore Fyre Lake</a>
           </div>
         </article>
         <article class="course-card">
-          <img class="course-bg" src="assets/course/tpc-hero.jpg" alt="TPC Deere Run" />
-          <div class="logo-wrap tpc-logo"><img src="assets/logos/tpc-logo.png" alt="TPC Deere Run logo" /></div>
-          <div>
+          <div class="course-image"><img class="course-bg" src="assets/course/tpc-hero.jpg" alt="TPC Deere Run" /></div>
+          <div class="course-copy">
+            <div class="logo-wrap tpc-logo"><img src="assets/logos/tpc-logo.png" alt="TPC Deere Run logo" /></div>
             <div class="course-meta">Saturday afternoon</div>
             <h3 class="course-name">TPC Deere Run</h3>
             <p class="course-line">The wow-factor finish: a PGA Tour stop, a big-stage setting, and the perfect exclamation point on Saturday.</p>
+            <a class="course-link" href="https://tpc.com/deererun/" target="_blank" rel="noopener">Explore TPC Deere Run</a>
           </div>
         </article>
       </div>
@@ -283,8 +312,8 @@
       <div class="timeline">
         <div class="day">
           <div class="day-date">Friday • July 24</div>
-          <div class="day-main"><strong>Opening round at Spirit Hollow</strong><span>Targeting an 11:00 AM tee time, then rolling into Rhythm City as home base.</span></div>
-          <div class="day-tag">TBD tee time</div>
+          <div class="day-main"><strong>Opening round at Spirit Hollow</strong><span>11:00 AM tee time, then rolling into Rhythm City as home base.</span></div>
+          <div class="day-tag">Confirmed</div>
         </div>
         <div class="day">
           <div class="day-date">Saturday • July 25</div>
@@ -298,8 +327,8 @@
         </div>
         <div class="day">
           <div class="day-date">Sunday • July 26</div>
-          <div class="day-main"><strong>Spirit Hollow encore</strong><span>Targeting a 10:00 AM tee time if the booking window cooperates.</span></div>
-          <div class="day-tag">TBD tee time</div>
+          <div class="day-main"><strong>Spirit Hollow encore</strong><span>10:00 AM tee time to close the weekend.</span></div>
+          <div class="day-tag">Confirmed</div>
         </div>
       </div>
     </section>
